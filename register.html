@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car</title>
+</head>
+<style>
+  body{
+    background-color: cornflowerblue;
+  }
+</style>
+<body>
+    <center>
+        <h1>Welcome to our Registration</h1>
+    </center>
+    <br>
+    <br>
+      <form class="d-flex">
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-outline-success" type="submit">{{ request.user }}</a>  
+            <!-- <a class="dropdown-item" href="{% url 'register' %}">Register</a> -->
+            <a href="{% url 'logout' %}" class="btn btn-outline-success" type="submit">Logout</a>
+            {% else %}
+            <a class="btn btn-outline-success" href="{% url 'login' %}" type="submit">Login</a>
+            <a class="btn btn-outline-success" href="{% url 'register' %}" type="submit">Sign UP</a>
+            {% endif %}
+
+      </form>
+      <br>
+      <br>
+   
+    {% if messages %}
+          <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+
+<form method="POST">
+    {% csrf_token %}
+  <div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+    <label for="email"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <hr>
+
+    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    <button type="submit" class="registerbtn">Register</button>
+  </div>
+
+
+  <div class="container signin">
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a>.</p>
+  </div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+
+
+</html>
